@@ -1,7 +1,7 @@
 #include "particles.h"
+#include "constant.h"
 int particles_init(Particles* P, int s_num, int p_num, int d)
 {
-
   int ret = 0;//return value
   P->species_num = s_num;
   P->particle_num = p_num;
@@ -14,6 +14,8 @@ int particles_init(Particles* P, int s_num, int p_num, int d)
 
   /* initialize species */
   P->species = (Species*) malloc(s_num*sizeof(Species));
+  P->species[0].mass = E_MASS;
+  P->species[0].charge = EC*-1.0;
   
   double** tmp [] = {P->pos,P->vel,P->pos_1,P->vel_1};
   int i,j;
@@ -73,7 +75,7 @@ int particles_print(Particles* P)
 
 extern int species_print(Species* S)
 {
-  printf ("%s %f\n","mass:",S->mass);
-  printf ("%s %f\n","charge:",S->charge);
+  printf ("%s %e %s\n","mass:",S->mass,"kg");
+  printf ("%s %e %s\n","charge:",S->charge,"C");
   return 0;
 }
