@@ -1,5 +1,4 @@
 #include "particles.h"
-#include "constant.h"
 int particles_init(Particles* P, int s_num, int p_num, int d)
 {
   int ret = 0;//return value
@@ -17,6 +16,8 @@ int particles_init(Particles* P, int s_num, int p_num, int d)
   P->efield_1 = (double**) calloc (s_num,sizeof(double*));
   P->bfield_1 = (double**) calloc (s_num,sizeof(double*));  
 
+  P->gamma = (double*) calloc(p_num,sizeof(double));
+  
   /* initialize species */
   // TODO: read from configuration file
   P->species = (Species*) malloc(s_num*sizeof(Species));

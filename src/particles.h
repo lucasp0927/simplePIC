@@ -2,6 +2,8 @@
 #define PARTICLES_H
 #include <stdio.h>
 #include <stdlib.h>
+#include "constant.h"
+
 typedef struct
 {
   double mass;
@@ -18,7 +20,8 @@ typedef struct
   double** efield;
   double** bfield;
   double** efield_1;
-  double** bfield_1;    
+  double** bfield_1;
+  double* gamma; // sqrt(1+(u/c)^2)
   Species* species;
   int species_num;
   int particle_num;

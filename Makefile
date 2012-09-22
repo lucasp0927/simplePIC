@@ -1,6 +1,6 @@
 TARGET = simplePIC
 
-_SRCS := main.c update_grid.c update_particle.c particles.c
+_SRCS := main.c particles.c update_grid.c update_particle.c constant.c
 
 CC = gcc
 
