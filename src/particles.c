@@ -12,14 +12,21 @@ int particles_init(Particles* P, int s_num, int p_num, int d)
   P->pos_1 = (double**) calloc (s_num,sizeof(double*));
   P->vel_1 = (double**) calloc (s_num,sizeof(double*));
 
+  P->efield = (double**) calloc (s_num,sizeof(double*));
+  P->bfield = (double**) calloc (s_num,sizeof(double*));
+  P->efield_1 = (double**) calloc (s_num,sizeof(double*));
+  P->bfield_1 = (double**) calloc (s_num,sizeof(double*));  
+
   /* initialize species */
+  // TODO: read from configuration file
   P->species = (Species*) malloc(s_num*sizeof(Species));
   P->species[0].mass = E_MASS;
   P->species[0].charge = EC*-1.0;
   
-  double** tmp [] = {P->pos,P->vel,P->pos_1,P->vel_1};
+  double** tmp [] = {P->pos,P->vel,P->pos_1,P->vel_1,P->efield,P->bfield,P->efield_1,P->bfield_1};
+  int tmp_len = 8;
   int i,j;
-  for (j=0;j<4;j++)
+  for (j=0;j<tmp_len;j++)
   {
     for (i=0;i<s_num;i++)
     {
