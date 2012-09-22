@@ -19,6 +19,7 @@ int main (int argc, char *argv[])
   init(&para,&P);
   printf ("%s\n","simplePIC");
   update_grid();
+  update_gamma(&P);
   update_particle(&P);
   particles_print(&P);
   return 0;

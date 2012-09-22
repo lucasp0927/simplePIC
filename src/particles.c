@@ -1,6 +1,7 @@
 #include "particles.h"
 int particles_init(Particles* P, int s_num, int p_num, int d)
 {
+  int i,j;  
   int ret = 0;//return value
   P->species_num = s_num;
   P->particle_num = p_num;
@@ -14,10 +15,14 @@ int particles_init(Particles* P, int s_num, int p_num, int d)
   P->efield = (double**) calloc (s_num,sizeof(double*));
   P->bfield = (double**) calloc (s_num,sizeof(double*));
   P->efield_1 = (double**) calloc (s_num,sizeof(double*));
-  P->bfield_1 = (double**) calloc (s_num,sizeof(double*));  
-
-  P->gamma = (double*) calloc(p_num,sizeof(double));
+  P->bfield_1 = (double**) calloc (s_num,sizeof(double*));
   
+  P->gamma = (double**) calloc (s_num,sizeof(double*));    
+  for (i=0;i<s_num;i++)
+    P->gamma[i] = (double*) calloc (p_num,sizeof(double));
+  P->gamma_1 = (double**) calloc (s_num,sizeof(double*));    
+  for (i=0;i<s_num;i++)
+    P->gamma_1[i] = (double*) calloc (p_num,sizeof(double));  
   /* initialize species */
   // TODO: read from configuration file
   P->species = (Species*) malloc(s_num*sizeof(Species));
@@ -26,7 +31,7 @@ int particles_init(Particles* P, int s_num, int p_num, int d)
   
   double** tmp [] = {P->pos,P->vel,P->pos_1,P->vel_1,P->efield,P->bfield,P->efield_1,P->bfield_1};
   int tmp_len = 8;
-  int i,j;
+
   for (j=0;j<tmp_len;j++)
   {
     for (i=0;i<s_num;i++)

@@ -21,7 +21,8 @@ typedef struct
   double** bfield;
   double** efield_1;
   double** bfield_1;
-  double* gamma; // sqrt(1+(u/c)^2)
+  double** gamma; // sqrt(1+(u/c)^2)
+  double** gamma_1; // sqrt(1+(u/c)^2)  
   Species* species;
   int species_num;
   int particle_num;
