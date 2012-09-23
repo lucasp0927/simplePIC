@@ -12,25 +12,19 @@ int particles_init(Particles* P, int s_num, int p_num, int d)
   P->pos_1 = (double**) calloc (s_num,sizeof(double*));
   P->vel_1 = (double**) calloc (s_num,sizeof(double*));
 
-  P->efield = (double**) calloc (s_num,sizeof(double*));
-  P->bfield = (double**) calloc (s_num,sizeof(double*));
-  P->efield_1 = (double**) calloc (s_num,sizeof(double*));
-  P->bfield_1 = (double**) calloc (s_num,sizeof(double*));
+  P->efield = (double*) calloc (p_num*d,sizeof(double*));
+  P->bfield = (double*) calloc (p_num*d,sizeof(double*));
+  P->efield_1 = (double*) calloc (p_num*d,sizeof(double*));
+  P->bfield_1 = (double*) calloc (p_num*d,sizeof(double*));
   
-  P->gamma = (double**) calloc (s_num,sizeof(double*));    
-  for (i=0;i<s_num;i++)
-    P->gamma[i] = (double*) calloc (p_num,sizeof(double));
-  P->gamma_1 = (double**) calloc (s_num,sizeof(double*));    
-  for (i=0;i<s_num;i++)
-    P->gamma_1[i] = (double*) calloc (p_num,sizeof(double));  
   /* initialize species */
   // TODO: read from configuration file
   P->species = (Species*) malloc(s_num*sizeof(Species));
-  P->species[0].mass = E_MASS;
-  P->species[0].charge = EC*-1.0;
+  P->species[0].mass = 1.0;
+  P->species[0].charge = 1.0;
   
-  double** tmp [] = {P->pos,P->vel,P->pos_1,P->vel_1,P->efield,P->bfield,P->efield_1,P->bfield_1};
-  int tmp_len = 8;
+  double** tmp [] = {P->pos,P->vel,P->pos_1,P->vel_1};
+  int tmp_len = 4;
 
   for (j=0;j<tmp_len;j++)
   {
@@ -60,16 +54,17 @@ int particles_init(Particles* P, int s_num, int p_num, int d)
 
 int particles_print(Particles* P)
 {
-  printf ("%s\n","--------------------");      
   int i,j;
-  for (i=0;i<P->species_num;i++)
-  {
-    printf ("%s %d\n","species ",i);
-    species_print(&(P->species[i]));
-    printf ("%s\n","--------------------");    
-  }
+  /* printf ("%s\n","--------------------");       */
+  /* int i,j; */
+  /* for (i=0;i<P->species_num;i++) */
+  /* { */
+  /*   printf ("%s %d\n","species ",i); */
+  /*   species_print(&(P->species[i])); */
+  /*   printf ("%s\n","--------------------");     */
+  /* } */
   
-  printf ("%s\n","Print out all particles");
+  //printf ("%s\n","Print out all particles");
 
   for (i=0;i<P->species_num;i++)
   {

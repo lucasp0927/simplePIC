@@ -4,6 +4,7 @@
 #include <math.h>
 #include "vector.h"
 #include "particles.h"
-extern int update_particle(Particles* P);
-extern int update_gamma(Particles* P);
+#include "parameter.h"
+extern int update_particle_boris(Particles* P, Parameter* para);
+extern int update_particle(Particles* P, Parameter* para);
 #endif
